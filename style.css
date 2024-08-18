@@ -1,7 +1,7 @@
 body {
     margin: 0;
     width: 100%;
-    background-color: lightblue;
+    background-color: rgb(87, 152, 173);
     text-align: center;
     font-family: sans-serif;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ body {
 
 .logoEmpresa {
     margin: auto;
-    filter: drop-shadow(0 0 30px #0008);
+    filter: drop-shadow(0 0 30px rgb(255, 255, 255));
 }
 
 h2 {
@@ -72,29 +72,32 @@ h2 {
 }
 
 th, td {
-    border: 1px solid #59e;
-    background-color: #49d7;
+    border: 1px solid #000000;
+    background-color: #ffffff;
     font-size: 0.95em;
     padding: 2%;
     box-shadow: 0 0 15px 0 #0002;
 }
 
 .color-celda-vencido {
-    background-color: #ffcccc;
+    background-color: #ff0000;
 }
 
 .color-celda-aviso {
-    background-color: #ffff99;
+    background-color: #ffc000;
 }
 
 .color-celda-ok {
-    background-color: #ccffcc;
+    background-color: #0ba00b;
 }
 
 .color-nodata {
-    background-color: #49db;
+    background-color: #ffffff;
 }
-
+.dataTable tr {
+    margin: 0;
+    padding: 0;
+}
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
@@ -102,4 +105,5 @@ th, td {
     100% {
         transform: rotate(360deg);
     }
+
 }
