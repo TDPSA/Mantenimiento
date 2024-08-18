@@ -1,7 +1,7 @@
 body {
     margin: 0;
     width: 100%;
-    background-color: rgb(87, 152, 173);
+    background-color: #8ad6ef;
     text-align: center;
     font-family: sans-serif;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ body {
 
 .logoEmpresa {
     margin: auto;
-    filter: drop-shadow(0 0 30px rgb(255, 255, 255));
+    filter: drop-shadow(0 0 30px #fcfcfc);
 }
 
 h2 {
@@ -72,8 +72,8 @@ h2 {
 }
 
 th, td {
-    border: 1px solid #000000;
-    background-color: #ffffff;
+    border: 1px solid #0d0d0d;
+    background-color: #fff;
     font-size: 0.95em;
     padding: 2%;
     box-shadow: 0 0 15px 0 #0002;
@@ -88,16 +88,13 @@ th, td {
 }
 
 .color-celda-ok {
-    background-color: #0ba00b;
+    background-color: #00b050;
 }
 
 .color-nodata {
-    background-color: #ffffff;
+    background-color: #f7f7f7;
 }
-.dataTable tr {
-    margin: 0;
-    padding: 0;
-}
+
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
@@ -105,5 +102,4 @@ th, td {
     100% {
         transform: rotate(360deg);
     }
-
 }
