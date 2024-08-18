@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            TDPSA
+        </title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="icon.png" type="image/png">
+    </head>
+    <body>
+        <div class="divTable">
+            <img class="logoEmpresa" src="cropped-Logo.png">
+            <h2 id="unit"></h2>
+            <table class="dataTable" id="dataTable" style="display:none;"></table>
+        </div>
+        <script>
+            function format_date(dateString) {
+                const date = new Date(dateString);
+                const formattedDate = date.toLocaleDateString('es-AR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+                });
+                return formattedDate;
+            }
+            const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbzYnwhOjnInoNvp8W-OrfyTqxdEDJi7k5gDiTQxPgev-W-bOyrLUzVLC-UVuB_eHDT00w/exec";
+            var url = document.location.href;
+            var k = url.substr(url.lastIndexOf("k=")+2);
+            let unit = document.getElementById('unit');
+            unit.textContent = "Unidad: " + k.replace(/%20/g, " ");
+            if(k){
+                fetch(AS_URL_BASE+'?k='+k)
+                .then(response => response.text())
+                .then(data => {
+                    let items = data.split(",");
+                    let table = document.getElementById('dataTable');
+                    let rows = [
+                        ["Último engrase", format_date(items[0])],
+                        ["Días sin engrase", items[1]],
+                        ["Última VTV", format_date(items[2])],
+                        ["Días restantes VTV", items[3]],
+                        ["Última Certificación", format_date(items[4])],
+                        ["Días restantes Certificación", items[5]]
+                    ];
+                    rows.forEach(row => {
+                        let tr = document.createElement('tr');
+                        row.forEach(cell => {
+                            let td = document.createElement('td');
+                            td.textContent = cell;
+                            tr.appendChild(td);
+                        });
+                        table.appendChild(tr);
+                    });
+                    table.style.display = 'table';
+                    document.querySelector('.lds-ring').style.display = 'none';
+                })
+            }
+        </script>
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </body>
+</html>
