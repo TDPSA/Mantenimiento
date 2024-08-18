@@ -79,6 +79,22 @@ th, td {
     box-shadow: 0 0 15px 0 #0002;
 }
 
+.color-celda-vencido {
+    background-color: #ffcccc;
+}
+
+.color-celda-aviso {
+    background-color: #ffff99;
+}
+
+.color-celda-ok {
+    background-color: #ccffcc;
+}
+
+.color-nodata {
+    background-color: #49db;
+}
+
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
