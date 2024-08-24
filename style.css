@@ -5,26 +5,26 @@ body {
     text-align: center;
     font-family: 'Roboto', sans-serif; /* Fuente más moderna */
     box-sizing: border-box;
-    font-size: 14px; /* Tamaño de fuente ligeramente mayor */
+    font-size: 1rem; /* Tamaño de fuente relativo */
     color: #333; /* Color de texto más oscuro */
 }
 
 .lds-ring {
     display: inline-block;
     position: relative;
-    margin-top: 40px;
-    width: 80px;
-    height: 80px;
+    margin-top: 2.5rem; /* Margen superior relativo */
+    width: 5rem; /* Ancho relativo */
+    height: 5rem; /* Altura relativa */
 }
 
 .lds-ring div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #3498db; /* Color azul moderno */
+    width: 4rem; /* Ancho relativo */
+    height: 4rem; /* Altura relativa */
+    margin: 0.5rem; /* Margen relativo */
+    border: 0.5rem solid #3498db; /* Color azul moderno */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #3498db transparent transparent transparent;
@@ -46,21 +46,21 @@ body {
 .lds-ring-remolque {
     display: inline-block;
     position: absolute; /* Cambia a absolute para posicionamiento fijo */
-    bottom: 20px; /* Ajusta según sea necesario para que esté justo debajo de la tabla */
+    bottom: 1.25rem; /* Ajusta según sea necesario para que esté justo debajo de la tabla */
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
+    width: 5rem; /* Ancho relativo */
+    height: 5rem; /* Altura relativa */
 }
 
 .lds-ring-remolque div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #3cb1e7; /* Color rojo moderno */
+    width: 4rem; /* Ancho relativo */
+    height: 4rem; /* Altura relativa */
+    margin: 0.5rem; /* Margen relativo */
+    border: 0.5rem solid #3cb1e7; /* Color rojo moderno */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #3c94e7 transparent transparent transparent;
@@ -89,25 +89,25 @@ body {
 
 .logoEmpresa {
     margin: auto;
-    filter: drop-shadow(0 0 30px #fcfcfc);
+    filter: drop-shadow(0 0 1.875rem #fcfcfc); /* Sombra relativa */
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 1.5rem; /* Tamaño de fuente relativo */
     font-weight: bold;
     color: #2c3e50; /* Color azul más oscuro */
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 1.25rem; /* Margen superior relativo */
+    margin-bottom: 0.625rem; /* Margen inferior relativo */
     text-align: center;
 }
 
 .divTable {
-    margin: 30px auto;
+    margin: 1.875rem auto; /* Margen relativo */
     width: 80%; /* Ancho mayor para mejor visualización */
-    max-width: 600px; /* Ancho máximo */
+    max-width: 37.5rem; /* Ancho máximo relativo */
     background-color: #f7f9fc; /* Fondo gris claro */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-    padding: 20px; /* Más espaciado interno */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    padding: 1.25rem; /* Espaciado interno relativo */
     box-sizing: border-box;
     text-align: center; /* Centrar el contenido */
 }
@@ -115,7 +115,7 @@ h2 {
 .dataTable {
     border-collapse: separate; /* Usar bordes separados */
     border-spacing: 0;
-    margin: 20px auto; /* Centrar la tabla */
+    margin: 1.25rem auto; /* Margen relativo */
     width: auto; /* Ajustar ancho automáticamente */
     background-color: #f7f9fc; /* Fondo gris claro */
     box-sizing: border-box;
@@ -123,10 +123,10 @@ h2 {
 }
 
 th, td {
-    border: 1px solid #ddd; /* Bordes más suaves */
+    border: 0.0625rem solid #ddd; /* Bordes más suaves */
     background-color: #fff; /* Fondo blanco para celdas */
-    font-size: 1em; /* Tamaño de fuente mayor */
-    padding: 10px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente relativo */
+    padding: 0.625rem; /* Espaciado interno relativo */
     text-align: center; /* Centrar el texto */
     white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
 }
@@ -140,25 +140,25 @@ th {
 .color-celda-vencido {
     background-color: #ff0000; /* Rojo más apagado */
     color: #000000; /* Texto blanco */
-    padding: 5px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Bordes más suaves */
-    font-size: 1em; /* Tamaño de fuente mayor */
+    padding: 0.3125rem; /* Espaciado interno relativo */
+    border: 0.0625rem solid #ddd; /* Bordes más suaves */
+    font-size: 1rem; /* Tamaño de fuente relativo */
     text-align: center; /* Centrar el texto */
 }
 
 .color-celda-aviso {
     background-color: #ffc000; /* Naranja más apagado */
-    padding: 5px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Bordes más suaves */
-    font-size: 1em; /* Tamaño de fuente mayor */
+    padding: 0.3125rem; /* Espaciado interno relativo */
+    border: 0.0625rem solid #ddd; /* Bordes más suaves */
+    font-size: 1rem; /* Tamaño de fuente relativo */
     text-align: center; /* Centrar el texto */
 }
 
 .color-celda-ok {
     background-color: #34a853; /* Verde más apagado */
-    padding: 5px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Bordes más suaves */
-    font-size: 1em; /* Tamaño de fuente mayor */
+    padding: 0.3125rem; /* Espaciado interno relativo */
+    border: 0.0625rem solid #ddd; /* Bordes más suaves */
+    font-size: 1rem; /* Tamaño de fuente relativo */
     text-align: center; /* Centrar el texto */
 }
 
@@ -166,9 +166,9 @@ th {
     background-color: #95a5a6; /* Gris más apagado */
     color: #fff; /* Texto blanco */
     font-weight: bold; /* Texto en negrita */
-    padding: 5px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Bordes más suaves */
-    font-size: 1em; /* Tamaño de fuente mayor */
+    padding: 0.3125rem; /* Espaciado interno relativo */
+    border: 0.0625rem solid #ddd; /* Bordes más suaves */
+    font-size: 1rem; /* Tamaño de fuente relativo */
     text-align: center; /* Centrar el texto */
 }
 
@@ -182,11 +182,11 @@ th {
 }
 
 .service-title {
-    font-size: 24px;
+    font-size: 1.5rem; /* Tamaño de fuente relativo */
     font-weight: bold;
     color: #2c3e50; /* Color azul más oscuro */
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 1.25rem; /* Margen superior relativo */
+    margin-bottom: 0.625rem; /* Margen inferior relativo */
     text-align: center;
 }
 
@@ -215,19 +215,19 @@ th {
 .lds-ring-table1 {
     display: inline-block;
     position: relative;
-    margin-top: 40px;
-    width: 80px;
-    height: 80px;
+    margin-top: 2.5rem; /* Margen superior relativo */
+    width: 5rem; /* Ancho relativo */
+    height: 5rem; /* Altura relativa */
 }
 
 .lds-ring-table1 div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #00bfff; /* Color azul tirando a celeste */
+    width: 4rem; /* Ancho relativo */
+    height: 4rem; /* Altura relativa */
+    margin: 0.5rem; /* Margen relativo */
+    border: 0.5rem solid #00bfff; /* Color azul tirando a celeste */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #00bfff transparent transparent transparent;
@@ -249,19 +249,19 @@ th {
 .lds-ring-table2 {
     display: inline-block;
     position: relative;
-    margin-top: 40px;
-    width: 80px;
-    height: 80px;
+    margin-top: 2.5rem; /* Margen superior relativo */
+    width: 5rem; /* Ancho relativo */
+    height: 5rem; /* Altura relativa */
 }
 
 .lds-ring-table2 div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #007acc; /* Color azul más oscuro */
+    width: 4rem; /* Ancho relativo */
+    height: 4rem; /* Altura relativa */
+    margin: 0.5rem; /* Margen relativo */
+    border: 0.5rem solid #007acc; /* Color azul más oscuro */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #007acc transparent transparent transparent;
@@ -290,28 +290,50 @@ th {
 }
 /* Estilo para el título "Remolque" */
 .remolque-title {
-    font-size: 24px;
+    font-size: 1.5rem; /* Tamaño de fuente relativo */
     font-weight: bold;
     color: #2c3e50; /* Color azul más oscuro */
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 1.25rem; /* Margen superior relativo */
+    margin-bottom: 0.625rem; /* Margen inferior relativo */
     text-align: center;
 }
 /* Estilo para el botón "Registrar Engrase" */
 .register-button {
     display: inline-block; /* Cambiado a inline-block para que esté al lado del texto */
-    margin-left: 10px; /* Espacio entre el texto y el botón */
-    padding: 8px 16px; /* Tamaño más pequeño */
-    font-size: 14px; /* Tamaño de fuente más pequeño */
+    margin-left: 0.625rem; /* Espacio entre el texto y el botón */
+    padding: 0.5rem 1rem; /* Tamaño más pequeño */
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
     font-weight: bold;
     color: #fff;
     background-color: #28a745; /* Color verde */
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* Bordes redondeados relativos */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .register-button:hover {
     background-color: #218838; /* Color verde más oscuro al pasar el ratón */
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .divTable {
+        width: 90%; /* Ancho mayor para mejor visualización en móviles */
+        padding: 1rem; /* Espaciado interno relativo */
+    }
+
+    .dataTable {
+        width: 100%; /* Ancho completo en móviles */
+    }
+
+    th, td {
+        font-size: 0.875rem; /* Tamaño de fuente más pequeño en móviles */
+        padding: 0.5rem; /* Espaciado interno relativo */
+    }
+
+    .register-button {
+        font-size: 0.75rem; /* Tamaño de fuente más pequeño en móviles */
+        padding: 0.375rem 0.75rem; /* Tamaño más pequeño */
+    }
 }
