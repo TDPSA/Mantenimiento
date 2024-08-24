@@ -57,13 +57,23 @@
                 return formattedDate;
             }
 
-            function format_cell_color(td, days, aviso, vencido) {
-                if (days < aviso) {
-                    td.classList.add('color-celda-ok');
-                } else if (days < vencido) {
-                    td.classList.add('color-celda-aviso');
+            function format_cell_color(td, days, aviso, vencido, isLUnit) {
+                if (isLUnit) {
+                    if (days < 53) {
+                        td.classList.add('color-celda-ok');
+                    } else if (days < 60) {
+                        td.classList.add('color-celda-aviso');
+                    } else {
+                        td.classList.add('color-celda-vencido');
+                    }
                 } else {
-                    td.classList.add('color-celda-vencido');
+                    if (days < aviso) {
+                        td.classList.add('color-celda-ok');
+                    } else if (days < vencido) {
+                        td.classList.add('color-celda-aviso');
+                    } else {
+                        td.classList.add('color-celda-vencido');
+                    }
                 }
             }
 
@@ -132,9 +142,9 @@
                                         cell = format_date(cell);
                                     } else {
                                         if (index === 1) {
-                                            format_cell_color(td, parseInt(cell), 23, 30);
+                                            format_cell_color(td, parseInt(cell), 23, 30, k.startsWith("L"));
                                         } else if (index === 3 || index === 5) {
-                                            format_cell_color(td, -parseInt(cell), -30, 0);
+                                            format_cell_color(td, -parseInt(cell), -30, 0, false);
                                         }
                                     }
                                 }
@@ -250,9 +260,9 @@
                                                         cell = format_date(cell);
                                                     } else {
                                                         if (index === 1) {
-                                                            format_cell_color(td, parseInt(cell), 23, 30);
+                                                            format_cell_color(td, parseInt(cell), 23, 30, false);
                                                         } else if (index === 3) {
-                                                            format_cell_color(td, -parseInt(cell), -30, 0);
+                                                            format_cell_color(td, -parseInt(cell), -30, 0, false);
                                                         }
                                                     }
                                                 }
