@@ -9,7 +9,7 @@ body {
     color: #333; /* Color de texto más oscuro */
 }
 
-.lds-ring {
+.lds-ring, .lds-ring-table1, .lds-ring-table2, .lds-ring-remolque {
     display: inline-block;
     position: relative;
     margin-top: 2.5rem; /* Margen superior relativo */
@@ -17,64 +17,50 @@ body {
     height: 5rem; /* Altura relativa */
 }
 
-.lds-ring div {
+.lds-ring div, .lds-ring-table1 div, .lds-ring-table2 div, .lds-ring-remolque div {
     box-sizing: border-box;
     display: block;
     position: absolute;
     width: 4rem; /* Ancho relativo */
     height: 4rem; /* Altura relativa */
     margin: 0.5rem; /* Margen relativo */
-    border: 0.5rem solid #3498db; /* Color azul moderno */
+    border: 0.5rem solid; /* Borde común */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.lds-ring div {
     border-color: #3498db transparent transparent transparent;
 }
 
-.lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
+.lds-ring-table1 div {
+    border-color: #00bfff transparent transparent transparent;
 }
 
-.lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
+.lds-ring-table2 div {
+    border-color: #007acc transparent transparent transparent;
 }
 
-.lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-
-/* Nuevo estilo para el círculo de carga de remolques */
 .lds-ring-remolque {
-    display: inline-block;
     position: absolute; /* Cambia a absolute para posicionamiento fijo */
     bottom: 1.25rem; /* Ajusta según sea necesario para que esté justo debajo de la tabla */
     left: 50%;
     transform: translateX(-50%);
-    width: 5rem; /* Ancho relativo */
-    height: 5rem; /* Altura relativa */
 }
 
 .lds-ring-remolque div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 4rem; /* Ancho relativo */
-    height: 4rem; /* Altura relativa */
-    margin: 0.5rem; /* Margen relativo */
-    border: 0.5rem solid #3cb1e7; /* Color rojo moderno */
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #3c94e7 transparent transparent transparent;
 }
 
-.lds-ring-remolque div:nth-child(1) {
+.lds-ring div:nth-child(1), .lds-ring-table1 div:nth-child(1), .lds-ring-table2 div:nth-child(1), .lds-ring-remolque div:nth-child(1) {
     animation-delay: -0.45s;
 }
 
-.lds-ring-remolque div:nth-child(2) {
+.lds-ring div:nth-child(2), .lds-ring-table1 div:nth-child(2), .lds-ring-table2 div:nth-child(2), .lds-ring-remolque div:nth-child(2) {
     animation-delay: -0.3s;
 }
 
-.lds-ring-remolque div:nth-child(3) {
+.lds-ring div:nth-child(3), .lds-ring-table1 div:nth-child(3), .lds-ring-table2 div:nth-child(3), .lds-ring-remolque div:nth-child(3) {
     animation-delay: -0.15s;
 }
 
@@ -92,7 +78,7 @@ body {
     filter: drop-shadow(0 0 1.875rem #fcfcfc); /* Sombra relativa */
 }
 
-h2 {
+h2, .service-title, .remolque-title {
     font-size: 1.5rem; /* Tamaño de fuente relativo */
     font-weight: bold;
     color: #2c3e50; /* Color azul más oscuro */
@@ -110,6 +96,10 @@ h2 {
     padding: 1.25rem; /* Espaciado interno relativo */
     box-sizing: border-box;
     text-align: center; /* Centrar el contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .dataTable {
@@ -120,12 +110,15 @@ h2 {
     background-color: #f7f9fc; /* Fondo gris claro */
     box-sizing: border-box;
     overflow: hidden; /* Para bordes redondeados */
+    margin: 0 auto; /* Centrar la tabla */
 }
 
 th, td {
     border: 0.0625rem solid #ddd; /* Bordes más suaves */
     background-color: #fff; /* Fondo blanco para celdas */
+    font-family: Arial, sans-serif; /* Fuente común */
     font-size: 1rem; /* Tamaño de fuente relativo */
+    color: #333; /* Color de texto común */
     padding: 0.625rem; /* Espaciado interno relativo */
     text-align: center; /* Centrar el texto */
     white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
@@ -137,170 +130,41 @@ th {
     font-weight: bold; /* Texto en negrita */
 }
 
-.color-celda-vencido {
-    background-color: #ff0000; /* Rojo más apagado */
-    color: #000000; /* Texto blanco */
+.color-celda-vencido, .color-celda-aviso, .color-celda-ok, .color-nodata {
     padding: 0.3125rem; /* Espaciado interno relativo */
     border: 0.0625rem solid #ddd; /* Bordes más suaves */
     font-size: 1rem; /* Tamaño de fuente relativo */
     text-align: center; /* Centrar el texto */
+}
+
+.color-celda-vencido {
+    background-color: #ff0000; /* Rojo más apagado */
+    color: #000000; /* Texto negro */
 }
 
 .color-celda-aviso {
     background-color: #ffc000; /* Naranja más apagado */
-    padding: 0.3125rem; /* Espaciado interno relativo */
-    border: 0.0625rem solid #ddd; /* Bordes más suaves */
-    font-size: 1rem; /* Tamaño de fuente relativo */
-    text-align: center; /* Centrar el texto */
 }
 
 .color-celda-ok {
     background-color: #34a853; /* Verde más apagado */
-    padding: 0.3125rem; /* Espaciado interno relativo */
-    border: 0.0625rem solid #ddd; /* Bordes más suaves */
-    font-size: 1rem; /* Tamaño de fuente relativo */
-    text-align: center; /* Centrar el texto */
 }
 
 .color-nodata {
     background-color: #95a5a6; /* Gris más apagado */
     color: #fff; /* Texto blanco */
     font-weight: bold; /* Texto en negrita */
-    padding: 0.3125rem; /* Espaciado interno relativo */
-    border: 0.0625rem solid #ddd; /* Bordes más suaves */
-    font-size: 1rem; /* Tamaño de fuente relativo */
-    text-align: center; /* Centrar el texto */
 }
 
-@keyframes lds-ring {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.service-title {
-    font-size: 1.5rem; /* Tamaño de fuente relativo */
-    font-weight: bold;
-    color: #2c3e50; /* Color azul más oscuro */
-    margin-top: 1.25rem; /* Margen superior relativo */
-    margin-bottom: 0.625rem; /* Margen inferior relativo */
-    text-align: center;
-}
-
-.hidden {
+.hidden, .hidden-remolque-table {
     display: none;
 }
 
-/* Bordes cuadrados para la tabla */
-.dataTable th:first-child {
-    border-top-left-radius: 0;
-}
-
-.dataTable th:last-child {
-    border-top-right-radius: 0;
-}
-
-.dataTable td:first-child {
-    border-bottom-left-radius: 0;
-}
-
-.dataTable td:last-child {
-    border-bottom-right-radius: 0;
-}
-
-/* Estilo para el círculo de carga de la primera tabla */
-.lds-ring-table1 {
-    display: inline-block;
-    position: relative;
-    margin-top: 2.5rem; /* Margen superior relativo */
-    width: 5rem; /* Ancho relativo */
-    height: 5rem; /* Altura relativa */
-}
-
-.lds-ring-table1 div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 4rem; /* Ancho relativo */
-    height: 4rem; /* Altura relativa */
-    margin: 0.5rem; /* Margen relativo */
-    border: 0.5rem solid #00bfff; /* Color azul tirando a celeste */
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #00bfff transparent transparent transparent;
-}
-
-.lds-ring-table1 div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-
-.lds-ring-table1 div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-
-.lds-ring-table1 div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-
-/* Estilo para el círculo de carga de la segunda tabla */
-.lds-ring-table2 {
-    display: inline-block;
-    position: relative;
-    margin-top: 2.5rem; /* Margen superior relativo */
-    width: 5rem; /* Ancho relativo */
-    height: 5rem; /* Altura relativa */
-}
-
-.lds-ring-table2 div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 4rem; /* Ancho relativo */
-    height: 4rem; /* Altura relativa */
-    margin: 0.5rem; /* Margen relativo */
-    border: 0.5rem solid #007acc; /* Color azul más oscuro */
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #007acc transparent transparent transparent;
-}
-
-.lds-ring-table2 div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-
-.lds-ring-table2 div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-
-.lds-ring-table2 div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-
-/* Clase para ocultar la segunda tabla */
-.hidden {
-    display: none;
-}
-
-/* Clase para ocultar la tabla de remolques */
-.hidden-remolque-table {
-    display: none;
-}
-/* Estilo para el título "Remolque" */
-.remolque-title {
-    font-size: 1.5rem; /* Tamaño de fuente relativo */
-    font-weight: bold;
-    color: #2c3e50; /* Color azul más oscuro */
-    margin-top: 1.25rem; /* Margen superior relativo */
-    margin-bottom: 0.625rem; /* Margen inferior relativo */
-    text-align: center;
-}
-/* Estilo para el botón "Registrar Engrase" */
-.register-button {
+.register-button, .reload-button {
     display: inline-block; /* Cambiado a inline-block para que esté al lado del texto */
     margin-left: 0.625rem; /* Espacio entre el texto y el botón */
+    margin-top: 1rem; /* Espacio adicional arriba del botón */
+    margin-bottom: 1rem; /* Espacio adicional abajo del botón */
     padding: 0.5rem 1rem; /* Tamaño más pequeño */
     font-size: 0.875rem; /* Tamaño de fuente más pequeño */
     font-weight: bold;
@@ -312,7 +176,7 @@ th {
     transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
+.register-button:hover, .reload-button:hover {
     background-color: #218838; /* Color verde más oscuro al pasar el ratón */
 }
 
@@ -332,8 +196,40 @@ th {
         padding: 0.5rem; /* Espaciado interno relativo */
     }
 
-    .register-button {
+    .register-button, .reload-button {
         font-size: 0.75rem; /* Tamaño de fuente más pequeño en móviles */
         padding: 0.375rem 0.75rem; /* Tamaño más pequeño */
     }
+}
+
+/* Media Queries para dispositivos más pequeños */
+@media (max-width: 480px) {
+    .divTable {
+        width: 95%; /* Ancho mayor para mejor visualización en móviles */
+        padding: 0.5rem; /* Espaciado interno relativo */
+    }
+
+    .dataTable {
+        width: 100%; /* Ancho completo en móviles */
+    }
+
+    th, td {
+        font-size: 0.75rem; /* Tamaño de fuente más pequeño en móviles */
+        padding: 0.25rem; /* Espaciado interno relativo */
+    }
+
+    .register-button, .reload-button {
+        font-size: 0.625rem; /* Tamaño de fuente más pequeño en móviles */
+        padding: 0.25rem 0.5rem; /* Tamaño más pequeño */
+    }
+}
+
+/* Estilo común para las celdas de las tablas */
+th, td {
+    font-family: Arial, sans-serif; /* Fuente común */
+    font-size: 1rem; /* Tamaño de fuente común */
+    color: #333; /* Color de texto común */
+    padding: 0.625rem; /* Espaciado interno común */
+    text-align: center; /* Alineación de texto común */
+    border: 1px solid #ddd; /* Borde común */
 }
