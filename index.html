@@ -1,21 +1,303 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            TDPSA
-        </title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="favicon.ico" type="image/ico">
-    </head>
-    <body>
-        <div class="divTable">
-            <img class="logoEmpresa" src="cropped-Logo.png">
-            <h2 id="unit"></h2>
-            <table class="dataTable" id="dataTable" style="display:none;"></table>
-        </div>
-        <script src="scripts.js"></script>
-        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDPSA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png" type="image/png">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="divTable">
+        <img class="logoEmpresa" src="cropped-Logo.png">
+        <h2 id="unit"></h2>
+        <button id="reloadButton">Recargar</button>
+        <table class="dataTable" id="dataTable" style="display:none;">
+            <tbody></tbody>
+        </table>
+        <button id="registerButton" class="register-button hidden">Registrar Engrase</button> <!-- Botón agregado aquí -->
+        <h3 class="service-title hidden">Service</h3>
+        <table class="dataTable" id="serviceTable" style="display:none;">
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <!-- Nueva sección para la tabla de remolques -->
+    <div class="divTable remolque-section hidden">
+        <h3 class="remolque-title">Remolque</h3> <!-- Título con clase agregada -->
+        <select id="remolqueDropdown"></select>
+        <div class="lds-ring-remolque" style="display:none;"><div></div><div></div><div></div><div></div></div> <!-- Círculo de carga para la tabla de remolques -->
+        <h3 class="service-title-remolques hidden" id="remolqueName"></h3> <!-- Encabezado para la ID del remolque -->
+        <table class="dataTable hidden-remolque-table" id="remolqueTable">
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const remolqueDropdown = document.getElementById('remolqueDropdown');
+            const remolqueName = document.getElementById('remolqueName');
+            const remolqueTable = document.getElementById('remolqueTable');
+            const remolqueTbody = remolqueTable.querySelector('tbody');
+            const remolqueLoader = document.querySelector('.lds-ring-remolque');
+            const registerButton = document.getElementById('registerButton');
+
+            function format_date(dateString) {
+                const date = new Date(dateString);
+                const formattedDate = date.toLocaleDateString('es-AR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+                return formattedDate;
+            }
+
+            function format_cell_color(td, days, aviso, vencido) {
+                if (days < aviso) {
+                    td.classList.add('color-celda-ok');
+                } else if (days < vencido) {
+                    td.classList.add('color-celda-aviso');
+                } else {
+                    td.classList.add('color-celda-vencido');
+                }
+            }
+
+            function format_number(numberString) {
+                const number = parseInt(numberString.replace(/\./g, '').replace(/,/g, ''));
+                if (isNaN(number)) {
+                    return "Invalid data";
+                }
+                return number.toLocaleString('es-AR');
+            }
+
+            const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbzDfA2s1yava1E4EPlVhPfzuxj_7ogd9C6KALv7hiV0v9UUWxuBd3FpHvfatLGuPIOykQ/exec";
+            var url = document.location.href;
+            var k = url.substr(url.lastIndexOf("k=") + 2);
+            let unit = document.getElementById('unit');
+            unit.textContent = "Unidad: " + k.replace(/%20/g, " ");
+            if (k) {
+                fetch(AS_URL_BASE + '?k=' + k)
+                    .then(response => response.text())
+                    .then(data => {
+                        let items = data.split(",");
+                        console.log("Datos obtenidos:", items); // Añadir esta línea para depuración
+                        let table = document.getElementById('dataTable');
+                        let serviceTable = document.getElementById('serviceTable');
+                        let remolqueSection = document.querySelector('.remolque-section');
+                        let remolqueDropdown = document.getElementById('remolqueDropdown');
+                        let remolqueName = document.getElementById('remolqueName'); // Encabezado del remolque
+                        let serviceTitle = document.querySelector('.service-title');
+                        let tbody = table.querySelector('tbody');
+                        let serviceTbody = serviceTable.querySelector('tbody');
+                        let remolqueTbody = remolqueTable.querySelector('tbody');
+                        let remolqueLoader = document.querySelector('.lds-ring-remolque'); // Círculo de carga para remolques
+                        let rows = [
+                            ["Último engrase", items[0]],
+                            ["Días sin engrase", items[1]],
+                            ["Última VTV", items[2]],
+                            ["Días restantes VTV", items[3]]
+                        ];
+
+                        if (!k.startsWith("R") && !k.startsWith("L") && !k.startsWith("T")) {
+                            rows.push(["Última Certificación", items[4]]);
+                            rows.push(["Días restantes Certificación", items[5]]);
+                        }
+
+                        let serviceRows = [
+                            ["Último Service", items[6]],
+                            ["Tipo", items[7]]
+                        ];
+
+                        if (k.startsWith("P") || k.startsWith("G")) {
+                            // Solo considerar las horas
+                            serviceRows.push(["Horas", items[9]]);
+                        } else {
+                            // Solo considerar los kilómetros
+                            serviceRows.push(["Kilómetros", items[8]]);
+                        }
+
+                        rows.forEach((row, index) => {
+                            let tr = document.createElement('tr');
+                            row.forEach((cell, col) => {
+                                let td = document.createElement('td');
+                                if (col === 1) {
+                                    if (cell === "-" || cell === "Sin Registro") {
+                                        td.classList.add('color-nodata');
+                                    } else if (index % 2 === 0) {
+                                        cell = format_date(cell);
+                                    } else {
+                                        if (index === 1) {
+                                            format_cell_color(td, parseInt(cell), 23, 30);
+                                        } else if (index === 3 || index === 5) {
+                                            format_cell_color(td, -parseInt(cell), -30, 0);
+                                        }
+                                    }
+                                }
+                                td.textContent = cell;
+                                tr.appendChild(td);
+                            });
+                            tbody.appendChild(tr);
+                        });
+
+                        if (!k.startsWith("R")) {
+                            serviceRows.forEach((row, index) => {
+                                let tr = document.createElement('tr');
+                                row.forEach((cell, col) => {
+                                    let td = document.createElement('td');
+                                    if (col === 1) {
+                                        if (cell === "-" || cell === "Sin Registro") {
+                                            td.classList.add('color-nodata');
+                                        } else if (index === 0) {
+                                            cell = format_date(cell);
+                                        } else if (index === 2) {
+                                            cell = format_number(cell);
+                                        }
+                                    }
+                                    td.textContent = cell;
+                                    tr.appendChild(td);
+                                });
+                                serviceTbody.appendChild(tr);
+                            });
+
+                            // Agregar fila para "Próximo Service"
+                            let tr = document.createElement('tr');
+                            let tdLabel = document.createElement('td');
+                            tdLabel.textContent = "Próximo Service";
+                            let tdValue = document.createElement('td');
+
+                            if (k.startsWith("P") || k.startsWith("G")) {
+                                // Solo considerar las horas
+                                let ultimoServiceHoras = parseInt(items[9].replace(/\./g, '').replace(/,/g, ''));
+                                if (!isNaN(ultimoServiceHoras)) {
+                                    let proximoServiceHoras = ultimoServiceHoras + 500; // Ajusta este valor según sea necesario
+                                    tdValue.textContent = proximoServiceHoras.toLocaleString('es-AR');
+                                } else {
+                                    tdValue.textContent = "Invalid data";
+                                }
+                            } else {
+                                // Solo considerar los kilómetros
+                                let ultimoServiceKm = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
+                                if (!isNaN(ultimoServiceKm)) {
+                                    let incremento = k.startsWith("L") ? 10000 : 20000;
+                                    let proximoServiceKm = ultimoServiceKm + incremento;
+                                    tdValue.textContent = proximoServiceKm.toLocaleString('es-AR');
+                                } else {
+                                    tdValue.textContent = "Invalid data";
+                                }
+                            }
+
+                            tr.appendChild(tdLabel);
+                            tr.appendChild(tdValue);
+                            serviceTbody.appendChild(tr);
+
+                            serviceTable.style.display = 'table';
+                            serviceTitle.classList.remove('hidden'); // Remover la clase 'hidden'
+                        } else {
+                            serviceTitle.style.display = 'none';
+                        }
+
+                        // Mostrar la tabla de remolques solo si la unidad no comienza con "G", "P", "L" o "R"
+                        if (!["G", "P", "L", "R"].some(prefix => k.startsWith(prefix))) {
+                            remolqueSection.classList.remove('hidden');
+
+                            // Agregar opciones al menú desplegable con los nombres de los remolques
+                            let remolque1 = items[10];
+                            let remolque2 = items[11];
+                            remolqueDropdown.innerHTML = '';
+
+                            if (remolque1 && remolque1.trim() !== "") {
+                                remolqueDropdown.innerHTML += `<option value="${remolque1}">${remolque1}</option>`;
+                            }
+                            if (remolque2 && remolque2.trim() !== "") {
+                                remolqueDropdown.innerHTML += `<option value="${remolque2}">${remolque2}</option>`;
+                            }
+
+                            // Evento para actualizar la segunda tabla al seleccionar un remolque
+                            remolqueDropdown.addEventListener('change', function() {
+                                let selectedRemolque = remolqueDropdown.value;
+                                remolqueName.textContent = selectedRemolque; // Actualizar el nombre del remolque
+                                // Mostrar el círculo de carga
+                                remolqueLoader.style.display = 'inline-block';
+                                // Ocultar la tabla de remolques mientras se carga
+                                remolqueTable.style.display = 'none';
+
+                                // Fetch data for the selected remolque
+                                fetch(AS_URL_BASE + '?k=' + selectedRemolque)
+                                    .then(response => response.text())
+                                    .then(remolqueData => {
+                                        let remolqueItems = remolqueData.split(",");
+                                        remolqueTbody.innerHTML = ""; // Clear previous data
+                                        let remolqueRows = [
+                                            ["Último engrase", remolqueItems[0]],
+                                            ["Días sin engrase", remolqueItems[1]],
+                                            ["Última VTV", remolqueItems[2]],
+                                            ["Días restantes VTV", remolqueItems[3]]
+                                        ];
+
+                                        remolqueRows.forEach((row, index) => {
+                                            let tr = document.createElement('tr');
+                                            row.forEach((cell, col) => {
+                                                let td = document.createElement('td');
+                                                if (col === 1) {
+                                                    if (cell === "-" || cell === "Sin Registro") {
+                                                        td.classList.add('color-nodata');
+                                                    } else if (index % 2 === 0) {
+                                                        cell = format_date(cell);
+                                                    } else {
+                                                        if (index === 1) {
+                                                            format_cell_color(td, parseInt(cell), 23, 30);
+                                                        } else if (index === 3) {
+                                                            format_cell_color(td, -parseInt(cell), -30, 0);
+                                                        }
+                                                    }
+                                                }
+                                                td.textContent = cell;
+                                                tr.appendChild(td);
+                                            });
+                                            remolqueTbody.appendChild(tr);
+                                        });
+
+                                        // Ocultar el círculo de carga
+                                        remolqueLoader.style.display = 'none';
+                                        // Mostrar la tabla de remolques
+                                        remolqueTable.style.display = 'table';
+                                    })
+                                    .catch(error => {
+                                        console.error('Error al obtener los datos del remolque:', error);
+                                        // Ocultar el círculo de carga en caso de error
+                                        remolqueLoader.style.display = 'none';
+                                    });
+                            });
+
+                            // Disparar el evento change para cargar los datos de la primera opción por defecto
+                            remolqueDropdown.dispatchEvent(new Event('change'));
+                        }
+
+                        table.style.display = 'table';
+                        document.querySelector('.lds-ring').style.display = 'none';
+
+                        // Mostrar el botón "Registrar Engrase" si la unidad empieza con "G"
+                        if (k.startsWith("G")) {
+                            registerButton.classList.remove('hidden');
+                            registerButton.onclick = function() {
+                                window.location.href = "https://forms.gle/zdH3uPTt2Wygr1jS8";
+                            };
+                        }
+                    })
+                    .catch(error => console.error('Error al obtener los datos:', error));
+            }
+
+            // Agregar evento al botón de recarga
+            document.getElementById('reloadButton').addEventListener('click', function() {
+                location.reload();
+            });
+        });
+    </script>
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</body>
 </html>

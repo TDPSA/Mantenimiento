@@ -1,11 +1,12 @@
 body {
     margin: 0;
     width: 100%;
-    background-color: #8ad6ef;
+    background-color: #e0e7ef; /* Fondo más claro y moderno */
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente más moderna */
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 14px; /* Tamaño de fuente ligeramente mayor */
+    color: #333; /* Color de texto más oscuro */
 }
 
 .lds-ring {
@@ -23,10 +24,10 @@ body {
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid #fff;
+    border: 8px solid #3498db; /* Color azul moderno */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: #3498db transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -41,58 +42,40 @@ body {
     animation-delay: -0.15s;
 }
 
-.logoEmpresa {
-    margin: auto;
-    filter: drop-shadow(0 0 30px #fcfcfc);
+/* Nuevo estilo para el círculo de carga de remolques */
+.lds-ring-remolque {
+    display: inline-block;
+    position: absolute; /* Cambia a absolute para posicionamiento fijo */
+    bottom: 20px; /* Ajusta según sea necesario para que esté justo debajo de la tabla */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
 }
 
-h2 {
-    margin: 20px 0;
-}
-
-.divTable {
-    margin: 30px auto;
-    width: 300px;
-    background-color: #fff;
-    box-shadow: 0 0 20px 0 #0005;
-    border-radius: 5px;
-    padding: 5% 0;
+.lds-ring-remolque div {
     box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #3cb1e7; /* Color rojo moderno */
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #3c94e7 transparent transparent transparent;
 }
 
-.dataTable {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: 0;
-    width: 80%;
-    margin-left: 10%;
-    background-color: #fff;
-    border-radius: 5px;
-    box-sizing: border-box;
+.lds-ring-remolque div:nth-child(1) {
+    animation-delay: -0.45s;
 }
 
-th, td {
-    border: 1px solid #0d0d0d;
-    background-color: #fff;
-    font-size: 0.95em;
-    padding: 2%;
-    box-shadow: 0 0 15px 0 #0002;
+.lds-ring-remolque div:nth-child(2) {
+    animation-delay: -0.3s;
 }
 
-.color-celda-vencido {
-    background-color: #ff0000;
-}
-
-.color-celda-aviso {
-    background-color: #ffc000;
-}
-
-.color-celda-ok {
-    background-color: #00b050;
-}
-
-.color-nodata {
-    background-color: #f7f7f7;
+.lds-ring-remolque div:nth-child(3) {
+    animation-delay: -0.15s;
 }
 
 @keyframes lds-ring {
@@ -102,4 +85,233 @@ th, td {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.logoEmpresa {
+    margin: auto;
+    filter: drop-shadow(0 0 30px #fcfcfc);
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50; /* Color azul más oscuro */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.divTable {
+    margin: 30px auto;
+    width: 80%; /* Ancho mayor para mejor visualización */
+    max-width: 600px; /* Ancho máximo */
+    background-color: #f7f9fc; /* Fondo gris claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    padding: 20px; /* Más espaciado interno */
+    box-sizing: border-box;
+    text-align: center; /* Centrar el contenido */
+}
+
+.dataTable {
+    border-collapse: separate; /* Usar bordes separados */
+    border-spacing: 0;
+    margin: 20px auto; /* Centrar la tabla */
+    width: auto; /* Ajustar ancho automáticamente */
+    background-color: #f7f9fc; /* Fondo gris claro */
+    box-sizing: border-box;
+    overflow: hidden; /* Para bordes redondeados */
+}
+
+th, td {
+    border: 1px solid #ddd; /* Bordes más suaves */
+    background-color: #fff; /* Fondo blanco para celdas */
+    font-size: 1em; /* Tamaño de fuente mayor */
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centrar el texto */
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+}
+
+th {
+    background-color: #5d6d7e; /* Fondo gris oscuro para encabezados */
+    color: #fff; /* Texto blanco para encabezados */
+    font-weight: bold; /* Texto en negrita */
+}
+
+.color-celda-vencido {
+    background-color: #ff0000; /* Rojo más apagado */
+    color: #000000; /* Texto blanco */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes más suaves */
+    font-size: 1em; /* Tamaño de fuente mayor */
+    text-align: center; /* Centrar el texto */
+}
+
+.color-celda-aviso {
+    background-color: #ffc000; /* Naranja más apagado */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes más suaves */
+    font-size: 1em; /* Tamaño de fuente mayor */
+    text-align: center; /* Centrar el texto */
+}
+
+.color-celda-ok {
+    background-color: #34a853; /* Verde más apagado */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes más suaves */
+    font-size: 1em; /* Tamaño de fuente mayor */
+    text-align: center; /* Centrar el texto */
+}
+
+.color-nodata {
+    background-color: #95a5a6; /* Gris más apagado */
+    color: #fff; /* Texto blanco */
+    font-weight: bold; /* Texto en negrita */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes más suaves */
+    font-size: 1em; /* Tamaño de fuente mayor */
+    text-align: center; /* Centrar el texto */
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.service-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50; /* Color azul más oscuro */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Bordes cuadrados para la tabla */
+.dataTable th:first-child {
+    border-top-left-radius: 0;
+}
+
+.dataTable th:last-child {
+    border-top-right-radius: 0;
+}
+
+.dataTable td:first-child {
+    border-bottom-left-radius: 0;
+}
+
+.dataTable td:last-child {
+    border-bottom-right-radius: 0;
+}
+
+/* Estilo para el círculo de carga de la primera tabla */
+.lds-ring-table1 {
+    display: inline-block;
+    position: relative;
+    margin-top: 40px;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring-table1 div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #00bfff; /* Color azul tirando a celeste */
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #00bfff transparent transparent transparent;
+}
+
+.lds-ring-table1 div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring-table1 div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring-table1 div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+/* Estilo para el círculo de carga de la segunda tabla */
+.lds-ring-table2 {
+    display: inline-block;
+    position: relative;
+    margin-top: 40px;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring-table2 div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #007acc; /* Color azul más oscuro */
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #007acc transparent transparent transparent;
+}
+
+.lds-ring-table2 div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring-table2 div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring-table2 div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+/* Clase para ocultar la segunda tabla */
+.hidden {
+    display: none;
+}
+
+/* Clase para ocultar la tabla de remolques */
+.hidden-remolque-table {
+    display: none;
+}
+/* Estilo para el título "Remolque" */
+.remolque-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50; /* Color azul más oscuro */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+/* Estilo para el botón "Registrar Engrase" */
+.register-button {
+    display: inline-block; /* Cambiado a inline-block para que esté al lado del texto */
+    margin-left: 10px; /* Espacio entre el texto y el botón */
+    padding: 8px 16px; /* Tamaño más pequeño */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745; /* Color verde */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #218838; /* Color verde más oscuro al pasar el ratón */
 }
