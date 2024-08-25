@@ -212,7 +212,7 @@
                         }
 
                         // Mostrar la tabla de remolques solo si la unidad no comienza con "G", "P", "L" o "R"
-                        if (!["G", "P", "L", "R"].some(prefix => k.startsWith(prefix))) {
+                        if (!["G", "P", "L", "R", "A"].some(prefix => k.startsWith(prefix))) {
                             remolqueSection.classList.remove('hidden');
 
                             // Agregar opciones al menú desplegable con los nombres de los remolques
