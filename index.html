@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDPSA</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/png">
+    <link rel="icon" href="icon.png" type="image/png">
     <style>
         .hidden {
             display: none;
@@ -123,11 +123,11 @@
                             ["Tipo", items[7]]
                         ];
 
-                        if (k.startsWith("P") || k.startsWith("G")) {
+                        if (k.startsWith("P") || k.startsWith("G") || k.startsWith("A")) {
                             // Solo considerar las horas
                             serviceRows.push(["Horas", items[9]]);
                         } else {
-                            // Solo considerar los kilómetros
+                             // Solo considerar los kilómetros
                             serviceRows.push(["Kilómetros", items[8]]);
                         }
 
@@ -180,7 +180,7 @@
                             tdLabel.textContent = "Próximo Service";
                             let tdValue = document.createElement('td');
 
-                            if (k.startsWith("P") || k.startsWith("G")) {
+                            if (k.startsWith("P") || k.startsWith("G") || k.startsWith("A")) {
                                 // Solo considerar las horas
                                 let ultimoServiceHoras = parseInt(items[9].replace(/\./g, '').replace(/,/g, ''));
                                 if (!isNaN(ultimoServiceHoras)) {
