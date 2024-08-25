@@ -43,9 +43,9 @@ body {
 
 .lds-ring-remolque {
     position: absolute; /* Cambia a absolute para posicionamiento fijo */
-    bottom: 1.25rem; /* Ajusta según sea necesario para que esté justo debajo de la tabla */
-    left: 50%;
-    transform: translateX(-50%);
+    top: 2cm; /* Mueve el círculo 2 cm más abajo */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Ajustar para centrar horizontalmente */
 }
 
 .lds-ring-remolque div {
@@ -100,6 +100,7 @@ h2, .service-title, .remolque-title {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative; /* Añadir posición relativa */
 }
 
 .dataTable {
@@ -233,5 +234,3 @@ th, td {
     text-align: center; /* Alineación de texto común */
     border: 1px solid #ddd; /* Borde común */
 }
-
-
