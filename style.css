@@ -152,7 +152,7 @@ th {
 }
 
 .color-nodata {
-    background-color: #95a5a6; /* Gris más apagado */
+    background-color: #ff0000; /* Gris más apagado */
     color: #fff; /* Texto blanco */
     font-weight: bold; /* Texto en negrita */
 }
