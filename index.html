@@ -15,7 +15,6 @@
             font-style: italic; /* Opcional: para darle estilo de cursiva */
         }
     </style>
-    
 </head>
 <body>
     <div class="divTable">
@@ -55,6 +54,9 @@
             const aclaracionContainer = document.getElementById('aclaracionContainer');
             
             function format_date(dateString) {
+                if (dateString === "NA") {
+                    return dateString;
+                }
                 const date = new Date(dateString);
                 const formattedDate = date.toLocaleDateString('es-AR', {
                     day: '2-digit',
@@ -134,7 +136,7 @@
                             // Solo considerar las horas
                             serviceRows.push(["Horas", items[9]]);
                         } else {
-                             // Solo considerar los kilómetros
+                            // Solo considerar los kilómetros
                             serviceRows.push(["Kilómetros", items[8]]);
                         }
 
@@ -143,7 +145,11 @@
                             row.forEach((cell, col) => {
                                 let td = document.createElement('td');
                                 if (col === 1) {
-                                    if (cell === "-" || cell === "Sin Registro") {
+                                    if (cell === "NA") {
+                                        td.classList.add('cell-na');
+                                    } else if (cell === "Sin Registro") {
+                                        td.classList.add('cell-sin-registro');
+                                    } else if (cell === "-") {
                                         td.classList.add('color-nodata');
                                     } else if (index % 2 === 0) {
                                         cell = format_date(cell);
@@ -167,7 +173,11 @@
                                 row.forEach((cell, col) => {
                                     let td = document.createElement('td');
                                     if (col === 1) {
-                                        if (cell === "-" || cell === "Sin Registro") {
+                                        if (cell === "NA") {
+                                            td.classList.add('cell-na');
+                                        } else if (cell === "Sin Registro") {
+                                            td.classList.add('cell-sin-registro');
+                                        } else if (cell === "-") {
                                             td.classList.add('color-nodata');
                                         } else if (index === 0) {
                                             cell = format_date(cell);
@@ -216,7 +226,7 @@
                             aclaracion.classList.add('aclaracion'); // Añadir la clase 'aclaracion'
 
                             if (k.startsWith("G") || k.startsWith("P")) {
-                                aclaracion.textContent = "* Service cada 500 hs a 600 hs máximo.";
+                                aclaracion.textContent = "* Service entre 500 y 600 hs máximo.";
                             } else if (k.startsWith("T") || k.startsWith("M") || k.startsWith("H") || k.startsWith("C")) {
                                 aclaracion.textContent = "* Service cada 20.000 km a 25.000 km máximo.";
                             } else if (k.startsWith("L")) {
@@ -231,6 +241,11 @@
                                 engrase.classList.add('aclaracion'); // Añadir la clase 'aclaracion'
                                 engrase.textContent = "* Se recomienda engrasar cada máximo 30 días.";
                                 aclaracionContainer.appendChild(engrase);
+                            } else if (k.startsWith("L")) {
+                                let engrase = document.createElement('p');
+                                engrase.classList.add('aclaracion'); // Añadir la clase 'aclaracion'
+                                engrase.textContent = "* Se recomienda engrasar cada máximo 60 días.";
+                                aclaracionContainer.appendChild(engrase);
                             }
 
                             serviceTable.style.display = 'table';
@@ -239,8 +254,8 @@
                             serviceTitle.style.display = 'none';
                         }
 
-                        // Mostrar la tabla de remolques solo si la unidad no comienza con "G", "P", "L" o "R"
-                        if (!["G", "P", "L", "R", "A"].some(prefix => k.startsWith(prefix))) {
+                        // Mostrar la tabla de remolques solo si la unidad no comienza con "A", "G", "P", "L" o "R"
+                        if (!["G", "P", "L", "R", "A", "C"].some(prefix => k.startsWith(prefix))) {
                             remolqueSection.classList.remove('hidden');
 
                             // Agregar opciones al menú desplegable con los nombres de los remolques
@@ -282,7 +297,11 @@
                                             row.forEach((cell, col) => {
                                                 let td = document.createElement('td');
                                                 if (col === 1) {
-                                                    if (cell === "-" || cell === "Sin Registro") {
+                                                    if (cell === "NA") {
+                                                        td.classList.add('cell-na');
+                                                    } else if (cell === "Sin Registro") {
+                                                        td.classList.add('cell-sin-registro');
+                                                    } else if (cell === "-") {
                                                         td.classList.add('color-nodata');
                                                     } else if (index % 2 === 0) {
                                                         cell = format_date(cell);

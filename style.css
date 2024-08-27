@@ -151,12 +151,6 @@ th {
     background-color: #34a853; /* Verde más apagado */
 }
 
-.color-nodata {
-    background-color: #ff0000; /* Gris más apagado */
-    color: #fff; /* Texto blanco */
-    font-weight: bold; /* Texto en negrita */
-}
-
 .hidden, .hidden-remolque-table {
     display: none;
 }
@@ -233,4 +227,12 @@ th, td {
     padding: 0.625rem; /* Espaciado interno común */
     text-align: center; /* Alineación de texto común */
     border: 1px solid #ddd; /* Borde común */
+}
+/* Estilos para celdas con "NA" y "Sin Registro" */
+.cell-na {
+    background-color: white;
+}
+
+.cell-sin-registro {
+    background-color: red;
 }
