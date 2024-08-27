@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDPSA</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/png">
+    <link rel="icon" href="icon.png" type="image/png">
     <style>
         .hidden {
             display: none;
         }
+        .aclaracion {
+            font-size: 14px; /* Ajusta el tamaño de la fuente según tus necesidades */
+            font-style: italic; /* Opcional: para darle estilo de cursiva */
+        }
     </style>
+    
 </head>
 <body>
     <div class="divTable">
@@ -23,8 +28,9 @@
         <button id="registerButton" class="register-button hidden">Registrar Engrase</button> <!-- Botón agregado aquí -->
         <h3 class="service-title hidden">Service</h3>
         <table class="dataTable" id="serviceTable" style="display:none;">
-            <tbody></tbody>
+            <tbody id="serviceTbody"></tbody>
         </table>
+        <div id="aclaracionContainer"></div> <!-- Contenedor para los mensajes de aclaración y engrase -->
     </div>
     
     <!-- Nueva sección para la tabla de remolques -->
@@ -46,7 +52,8 @@
             const remolqueTbody = remolqueTable.querySelector('tbody');
             const remolqueLoader = document.querySelector('.lds-ring-remolque');
             const registerButton = document.getElementById('registerButton');
-
+            const aclaracionContainer = document.getElementById('aclaracionContainer');
+            
             function format_date(dateString) {
                 const date = new Date(dateString);
                 const formattedDate = date.toLocaleDateString('es-AR', {
@@ -204,6 +211,27 @@
                             tr.appendChild(tdLabel);
                             tr.appendChild(tdValue);
                             serviceTbody.appendChild(tr);
+                            // Agregar mensaje de aclaración
+                            let aclaracion = document.createElement('p');
+                            aclaracion.classList.add('aclaracion'); // Añadir la clase 'aclaracion'
+
+                            if (k.startsWith("G") || k.startsWith("P")) {
+                                aclaracion.textContent = "* Service entre 500 y 600 hs máximo.";
+                            } else if (k.startsWith("T") || k.startsWith("M") || k.startsWith("H") || k.startsWith("C")) {
+                                aclaracion.textContent = "* Service cada 20.000 km a 25.000 km máximo.";
+                            } else if (k.startsWith("L")) {
+                                aclaracion.textContent = "* Service cada 10.000 km a 12.000 km máximo.";
+                            }
+
+                            aclaracionContainer.appendChild(aclaracion);
+
+                            // Agregar mensaje de engrase
+                            if (k.startsWith("G") || k.startsWith("P") || k.startsWith("T") || k.startsWith("M") || k.startsWith("H") || k.startsWith("C")) {
+                                let engrase = document.createElement('p');
+                                engrase.classList.add('aclaracion'); // Añadir la clase 'aclaracion'
+                                engrase.textContent = "* Se recomienda engrasar cada máximo 30 días.";
+                                aclaracionContainer.appendChild(engrase);
+                            }
 
                             serviceTable.style.display = 'table';
                             serviceTitle.classList.remove('hidden'); // Remover la clase 'hidden'
@@ -212,7 +240,7 @@
                         }
 
                         // Mostrar la tabla de remolques solo si la unidad no comienza con "G", "P", "L" o "R"
-                        if (!["G", "P", "L", "R", "A","C"].some(prefix => k.startsWith(prefix))) {
+                        if (!["G", "P", "L", "R", "A"].some(prefix => k.startsWith(prefix))) {
                             remolqueSection.classList.remove('hidden');
 
                             // Agregar opciones al menú desplegable con los nombres de los remolques
