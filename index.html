@@ -210,7 +210,7 @@
                                 // Solo considerar los kilómetros
                                 let ultimoServiceKm = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
                                 if (!isNaN(ultimoServiceKm)) {
-                                    let incremento = k.startsWith("L") ? 10000 : 20000;
+                                    let incremento = k.startsWith("L", "F") ? 10000 : 20000;
                                     let proximoServiceKm = ultimoServiceKm + incremento;
                                     tdValue.textContent = proximoServiceKm.toLocaleString('es-AR');
                                 } else {
@@ -254,8 +254,8 @@
                             serviceTitle.style.display = 'none';
                         }
 
-                        // Mostrar la tabla de remolques solo si la unidad no comienza con "A", "G", "P", "L" o "R"
-                        if (!["G", "P", "L", "R", "A", "C"].some(prefix => k.startsWith(prefix))) {
+                        // Mostrar la tabla de remolques solo si la unidad no comienza con "F", "A", "G", "P", "L" o "R"
+                        if (!["G", "P", "L", "R", "A", "C", "F"].some(prefix => k.startsWith(prefix))) {
                             remolqueSection.classList.remove('hidden');
 
                             // Agregar opciones al menú desplegable con los nombres de los remolques
