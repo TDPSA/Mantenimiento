@@ -210,7 +210,7 @@
                                 // Solo considerar los kilómetros
                                 let ultimoServiceKm = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
                                 if (!isNaN(ultimoServiceKm)) {
-                                    let incremento = k.startsWith[("L", "F")] ? 10000 : 20000;
+                                    let incremento = k.startsWith("L") || k.startsWith("F") ? 10000 : 20000;
                                     let proximoServiceKm = ultimoServiceKm + incremento;
                                     tdValue.textContent = proximoServiceKm.toLocaleString('es-AR');
                                 } else {
