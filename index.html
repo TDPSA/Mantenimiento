@@ -129,15 +129,17 @@
 
                         let serviceRows = [
                             ["Último Service", items[6]],
-                            ["Tipo", items[7]]
+                         
                         ];
 
                         if (k.startsWith("P") || k.startsWith("G") || k.startsWith("A")) {
                             // Solo considerar las horas
-                            serviceRows.push(["Horas", items[9]]);
+                            let horas = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
+                            serviceRows.push(["Horas", isNaN(horas) ? items[8] : horas.toLocaleString('es-AR')]);
                         } else {
                             // Solo considerar los kilómetros
-                            serviceRows.push(["Kilómetros", items[8]]);
+                            let km = parseInt(items[7].replace(/\./g, '').replace(/,/g, ''));
+                            serviceRows.push(["Kilómetros", isNaN(km) ? items[7] : km.toLocaleString('es-AR')]);
                         }
 
                         rows.forEach((row, index) => {
@@ -199,7 +201,7 @@
 
                             if (k.startsWith("P") || k.startsWith("G") || k.startsWith("A")) {
                                 // Solo considerar las horas
-                                let ultimoServiceHoras = parseInt(items[9].replace(/\./g, '').replace(/,/g, ''));
+                                let ultimoServiceHoras = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
                                 if (!isNaN(ultimoServiceHoras)) {
                                     let proximoServiceHoras = ultimoServiceHoras + 500; // Ajusta este valor según sea necesario
                                     tdValue.textContent = proximoServiceHoras.toLocaleString('es-AR');
@@ -208,7 +210,7 @@
                                 }
                             } else {
                                 // Solo considerar los kilómetros
-                                let ultimoServiceKm = parseInt(items[8].replace(/\./g, '').replace(/,/g, ''));
+                                let ultimoServiceKm = parseInt(items[7].replace(/\./g, '').replace(/,/g, ''));
                                 if (!isNaN(ultimoServiceKm)) {
                                     let incremento = k.startsWith("L") || k.startsWith("F") ? 10000 : 20000;
                                     let proximoServiceKm = ultimoServiceKm + incremento;
